@@ -77,20 +77,21 @@ class ProfileDetails with ChangeNotifier {
       dio.options.headers['Authorization'] = 'Bearer $_token';
       response = await dio.get('$url/api/v1/profile/current');
 
-      _profile = {
-        'data': Profile(
-          username: response.data['data']['nikename'],
-          shortDescription: response.data['data']['shortDescription'],
-          jokeRole: response.data['data']['JobRole'],
-          phone: response.data['data']['phone'],
-          experience: response.data['data']['experience'],
-          education: response.data['data']['education'],
-          address: response.data['data']['address'],
-        )
-      };
-
-      print(profile['data'].experience);
-      print(response.data['data']);
+      if (response.data['data'] == null) {
+        _profile = {};
+      } else {
+        _profile = {
+          'data': Profile(
+            username: response.data['data']['nikename'],
+            shortDescription: response.data['data']['shortDescription'],
+            jokeRole: response.data['data']['JobRole'],
+            phone: response.data['data']['phone'],
+            experience: response.data['data']['experience'],
+            education: response.data['data']['education'],
+            address: response.data['data']['address'],
+          )
+        };
+      }
 
       notifyListeners();
     } catch (err) {

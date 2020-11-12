@@ -268,9 +268,14 @@ class _ProfileState extends State<Profile> {
                                   ),
                                   RaisedButton.icon(
                                     onPressed: () {
-                                      Navigator.of(context)
-                                          .pushNamed(AddProfile.routeName);
+                                      // ignore: unnecessary_statements
+                                      profile.profile.isNotEmpty
+                                          // ignore: unnecessary_statements
+                                          ? null
+                                          : Navigator.of(context)
+                                              .pushNamed(AddProfile.routeName);
                                     },
+                                    disabledColor: Colors.grey,
                                     icon: Icon(Icons.person_add),
                                     label: Text(
                                       "Add Profile",
@@ -307,122 +312,139 @@ class _ProfileState extends State<Profile> {
                                   color: Colors.white,
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 10,
-                                  horizontal: 10,
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Text(
-                                      'Username: @${profile.profile['data'].username}',
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                      ),
-                                    ),
-                                    Text(
-                                      'Experience: ${profile.profile['data'].experience} ${int.parse(profile.profile['data'].experience) == 1 ? 'Year' : 'Years'}',
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Text(
-                                "Description",
-                                // textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Text(
-                                "${profile.profile['data'].shortDescription}",
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  const Icon(
-                                    Icons.phone,
-                                    color: Colors.white,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    '${profile.profile['data'].phone}',
+                              if (profile.profile.isEmpty)
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 20),
+                                  child: Text(
+                                    "Please add the profile",
                                     style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
+                                        color: Colors.white, fontSize: 30),
+                                  ),
+                                )
+                              else
+                                Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 10,
+                                        horizontal: 10,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          Text(
+                                            'Username: @${profile.profile['data'].username}',
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18,
+                                            ),
+                                          ),
+                                          Text(
+                                            'Experience: ${profile.profile['data'].experience} ${int.parse(profile.profile['data'].experience) == 1 ? 'Year' : 'Years'}',
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18,
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                  )
-                                ],
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 18),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
+                                    Text(
+                                      "Description",
+                                      // textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    Text(
+                                      "${profile.profile['data'].shortDescription}",
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
                                     Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: <Widget>[
-                                        Icon(
-                                          Icons.book,
+                                        const Icon(
+                                          Icons.phone,
                                           color: Colors.white,
                                         ),
                                         SizedBox(
                                           width: 10,
                                         ),
                                         Text(
-                                          "${profile.profile['data'].education}",
+                                          '${profile.profile['data'].phone}',
                                           style: const TextStyle(
                                             color: Colors.white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15,
                                           ),
                                         )
                                       ],
                                     ),
-                                    Row(
-                                      children: <Widget>[
-                                        Icon(
-                                          Icons.post_add,
-                                          color: Colors.white,
-                                        ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          "${profile.profile['data'].address}",
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 18),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          Row(
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons.book,
+                                                color: Colors.white,
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text(
+                                                "${profile.profile['data'].education}",
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              )
+                                            ],
                                           ),
-                                        )
-                                      ],
+                                          Row(
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons.post_add,
+                                                color: Colors.white,
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text(
+                                                "${profile.profile['data'].address}",
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ),
                                     )
                                   ],
-                                ),
-                              )
+                                )
                             ],
                           ),
                         ],
